@@ -12,7 +12,7 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('/')}}assets/images/favicon.ico">
-
+    <link href="{{asset('/')}}assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{asset('/')}}assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -131,8 +131,8 @@
                             <span>Blog Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html">Add Blog</a></li>
-                            <li><a href="ecommerce-product-detail.html">Manage Blog</a></li>
+                            <li><a href="{{route('blog.add')}}">Add Blog</a></li>
+                            <li><a href="{{route('blog.manage')}}">Manage Blog</a></li>
                         </ul>
                     </li>
 
@@ -237,6 +237,11 @@
 
 <script src="{{asset('/')}}assets/js/pages/dashboard.init.js"></script>
 
+<!-- Summernote js -->
+<script src="{{asset('/')}}assets/libs/summernote/summernote-bs4.min.js"></script>
+
+<!-- init js -->
+<script src="{{asset('/')}}assets/js/pages/form-editor.init.js"></script>
 <!-- App js -->
 <script src="{{asset('/')}}assets/js/app.js"></script>
 </body>
