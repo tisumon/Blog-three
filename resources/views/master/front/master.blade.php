@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>BIZTROX</title>
+    <title>Biztrox</title>
 
 
     <!-- mobile responsive meta -->
@@ -90,11 +90,26 @@
                                 Home
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" href="{{route('blog-category')}}">
-                               Blog Category
-                            </a>
+                        <li class="nav-item dropdown">
+                            <a href="" class=" nav-link dropdown-toggle" > All Blog category </a>
+                            <ul class="dropdown-menu">
+                                @foreach($categories as $category)
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('blog-category',['id'=>$category->id])}}">
+                                            {{$category->name}}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
+{{--                        @foreach($categories as $category)--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('blog-category')}}">--}}
+{{--                                {{$category->name}}--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        @endforeach--}}
+
                         <li class="nav-item">
                             <a class="nav-link" href="">Contact</a>
                         </li>

@@ -43,7 +43,7 @@ class Blog extends Model
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User', 'author_id');
+        return $this->belongsTo('App\Models\User','author_id');
     }
 
     public static function updateBlog($request, $id)

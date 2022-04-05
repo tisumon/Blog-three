@@ -11,6 +11,7 @@ class BiztroxController extends Controller
     private $blog;
     private $blogs;
     private $category;
+    private $categories;
     private $recentBlogs;
 
     public function index()
@@ -19,9 +20,10 @@ class BiztroxController extends Controller
         return view('website.home.home', ['recent_blogs' => $this->recentBlogs]);
     }
 
-    public function category()
+    public function category($id)
     {
-        return view('website.category.category');
+        $this->blogs= Blog::where('category_id',$id)->where('status', 1)->orderBy('id','desc')->get();
+        return view('website.category.category',['blogs'=>$this->blogs]);
     }
 
     public function detail($id)
