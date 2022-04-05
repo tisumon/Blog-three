@@ -245,7 +245,9 @@
                             <a class="text-color text-underline" href="#">View All Comments</a>
                         </div>
                         <!-- comment form -->
+
                         <div>
+                            @if(Session::get('user_id'))
                             <h4>Add your comment:</h4>
                             <p class="mb-30">Your email address will not be published. Required fields are marked *</p>
                             <form action="#" class="row">
@@ -264,7 +266,11 @@
                                     <button class="btn btn-sm btn-primary" type="submit" value="send">Submit</button>
                                 </div>
                             </form>
+                                @else
+                            <h4>For Comment Please<a href="">Login</a></h4>
+                            @endif
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4">
