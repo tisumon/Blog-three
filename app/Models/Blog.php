@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
@@ -9,8 +10,8 @@ use Auth;
 class Blog extends Model
 {
     use HasFactory;
+
     private static $blog;
-    private static $category;
     private static $image;
     private static $imageName;
     private static $imageUrl;
@@ -18,29 +19,37 @@ class Blog extends Model
 
     public static function getImageUrl($request)
     {
-        self::$image      = $request->file('image');
-        self::$imageName  = self::$image->getClientOriginalName();
-        self::$directory  = 'blog-images/';
+        self::$image     = $request->file('image');
+        self::$imageName = self::$image->getClientOriginalName();
+        self::$directory = 'blog-images/';
         self::$image->move(self::$directory, self::$imageName);
-        self::$imageUrl = self::$directory.self::$imageName;
+        self::$imageUrl  = self::$directory.self::$imageName;
         return self::$imageUrl;
     }
 
     public static function newBlog($request)
     {
-        self::$blog                     = new Blog();
-        self::$blog->category_id        = $request->category_id;
-        self::$blog->main_title         = $request->main_title;
-        self::$blog->sub_title          = $request->sub_title;
-        self::$blog->short_description  = $request->short_description  ;
-        self::$blog->long_description   = $request->long_description  ;
-        self::$blog->image              = self::getImageUrl($request);
-        self::$blog->author_id          =Auth::user()->id;
-        self::$blog->save();
+
+        self::$blog = new Blog();
+        self::$imageUrl = self::getImageUrl($request);
+
+        self::saveBlogBasicInfo(self::$blog, $request, self::$imageUrl);
     }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo('App\Models\User', 'author_id');
+    }
+
     public static function updateBlog($request, $id)
     {
-        self::$blod                 = Blog::find($id);
+        self::$blog = Blog::find($id);
+
         if ($request->file('image'))
         {
             if (file_exists(self::$blog->image))
@@ -49,14 +58,23 @@ class Blog extends Model
             }
             self::$imageUrl = self::getImageUrl($request);
         }
-        else
-        {
-            self::$imageUrl = self::$category->image;
+        else {
+            self::$imageUrl = self::$blog->image;
         }
 
-        self::$category->name           = $request->name;
-        self::$category->description    = $request->description;
-        self::$category->image          = self::$imageUrl;
-        self::$category->save();
+        self::saveBlogBasicInfo(self::$blog, $request, self::$imageUrl);
+    }
+
+    public static function saveBlogBasicInfo($blog, $request, $imageUrl)
+    {
+        $blog->category_id       = $request->category_id;
+        $blog->author_id         = Auth::user()->id;
+        $blog->main_title        = $request->main_title;
+        $blog->sub_title         = $request->sub_title;
+        $blog->short_description = $request->short_description;
+        $blog->long_description  = $request->long_description;
+        $blog->image             = $imageUrl;
+
+        $blog->save();
     }
 }

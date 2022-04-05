@@ -1,4 +1,6 @@
+
 @extends('master.front.master')
+
 
 @section('body')
     <section class="page-title overlay" style="background-image: url({{asset('/')}}website/images/background/page-title.jpg);">
@@ -23,12 +25,12 @@
             <div class="row">
                 <div class="col-lg-8 py-100">
                     <div class="border rounded bg-white">
-                        <img class="img-fluid w-100 rounded-top" src="{{asset('/')}}website/images/blog/blog-single.jpg" alt="blog-image">
+                        <img class="img-fluid w-100 rounded-top" src="{{asset($blog->image)}}" alt="blog-image">
                         <div class="p-4">
-                            <h3>Tips For Business Success 2017: Why To Online</h3>
+                            <h3>{{$blog->main_title}}</h3>
                             <ul class="list-inline d-block pb-4 border-bottom mb-3">
                                 <li class="list-inline-item text-color">Posted By Admin</li>
-                                <li class="list-inline-item text-color">On 25 November</li>
+                                <li class="list-inline-item text-color">{{$blog->created_at}}</li>
                                 <li class="list-inline-item text-color">Tag: Advice, Fitness</li>
                             </ul>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et

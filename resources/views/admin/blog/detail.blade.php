@@ -1,3 +1,4 @@
+
 @extends('master.admin.master')
 
 @section('body')
@@ -13,7 +14,7 @@
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Category name</label>
                             <div class="col-sm-9">
                                 <select class="form-control" required name="category_id">
-                                    <option value="" disabled selected> -- Select Category Name -- </option>
+                                    <option value="" disabled selected > -- Select Category Name -- </option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}"> {{$category->name}} </option>
                                     @endforeach
@@ -35,7 +36,7 @@
                         <div class="form-group row mb-4">
                             <label for="horizontal-email-input" class="col-sm-3 col-form-label">Short Description</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control summernote" name="short_description" id="horizontal-email-input"></textarea>
+                                <textarea class="form-control" name="short_description" id="horizontal-email-input"></textarea>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
