@@ -249,25 +249,18 @@
                         <div>
                             @if(Session::get('user_id'))
                             <h4>Add your comment:</h4>
-                            <p class="mb-30">Your email address will not be published. Required fields are marked *</p>
-                            <form action="#" class="row">
+                            <form action="{{route('new-comment',['id'=>$blog->id])}}" method="POST" class="row">
+                                @csrf
                                 <div class="col-12">
                 <textarea name="comment" id="comment" class="form-control mb-30 p-2" placeholder="Your comment here"
                           style="height: 180px;"></textarea>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control mb-30" id="user-name" name="name" placeholder="Your name here">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="email" id="user-email" name="email" class="form-control mb-30"
-                                           placeholder="Your email address here">
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-sm btn-primary" type="submit" value="send">Submit</button>
                                 </div>
                             </form>
                                 @else
-                            <h4>For Comment Please<a href=""> Login Here</a></h4>
+                            <h4>For Comment Please<a href="{{route('user-login',['id'=>$blog->id])}}"> Login Here</a></h4>
                             @endif
                         </div>
 

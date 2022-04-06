@@ -86,7 +86,7 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item ">
-                            <a class="nav-link dropdown-toggle" href="#">
+                            <a class="nav-link dropdown-toggle" href="{{route('home')}}">
                                 Home
                             </a>
                         </li>
@@ -111,7 +111,7 @@
 {{--                        @endforeach--}}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="">Contact</a>
+                            <a class="nav-link" href="{{route('blog-contact')}}">Contact</a>
                         </li>
                     </ul>
                 </div>

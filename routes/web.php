@@ -5,6 +5,7 @@ use App\Http\Controllers\BiztroxController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,15 @@ use App\Http\Controllers\BlogController;
 */
 
 Route::get('/', [BiztroxController::class, 'index'])->name('home');
+Route::get('/blog-contact', [BiztroxController::class, 'contact'])->name('blog-contact');
 Route::get('/blog-category/{id}', [BiztroxController::class, 'category'])->name('blog-category');
 Route::get('/blog-detail/{id}', [BiztroxController::class, 'detail'])->name('blog-detail');
+Route::get('/new-comment/{id}', [BiztroxController::class, 'newComment'])->name('new-comment');
+
+Route::get('/user-login/{id?}', [AuthController::class, 'index'])->name('user-login');
+Route::get('/user-register', [AuthController::class, 'register'])->name('user-register');
+Route::post('/new-user-register', [AuthController::class, 'newRegister'])->name('new-user-register');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
